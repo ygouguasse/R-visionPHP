@@ -11,6 +11,8 @@ try {
   get('/authentification/inscription', "afficherPageinscription");
   get('/api/authentification/inscription', "inscrire");
 
+  get('/api/authentification/courriel-disponible/$courriel', "verifierCourrielDisponible");
+
   get('/soumission/demande-soumission', "afficherPageDemandeSoumission");
   post('/api/soumission/demande-soumission', "ajouterDemandeSoumission");
   get('/soumission/soumissions-en-attente', "afficherPageSoumissionsEnAttente");

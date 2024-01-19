@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<form method="put" class="needs-validation" action="/api/authentification/connexion" novalidate>
+<form method="POST" class="needs-validation" action="/api/authentification/connexion" novalidate>
   <div class="form-floating mb-3">
     <input type="courriel" class="form-control" id="input-courriel" name="courriel" placeholder="name@example.com" maxlength="50" pattern="[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}" required>
     <label for="input-courriel">Courriel</label>

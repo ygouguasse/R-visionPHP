@@ -1,5 +1,5 @@
 <?php
-require('modele/modeleUtilisateurs.php');
+
 function demarrerSession()
 {
   if (session_status() == PHP_SESSION_NONE) {
@@ -75,6 +75,25 @@ if (password_verify($_POST['motDePasse'],$utilisateur['motDePasse'])) {
 
 function verifierCourrielDisponible($courriel)
 {
+  header('Content-Type: application/json; charset=utf-8');
+   if (!$courriel) {
+      // header("Location: index.php?action=Connexion&erreur=identifiants");
+      http_response_code(400);
+      echo json_encode(["erreur"=> "autreErreur"]);
+      return;
+  }
+  $reqUtilisateur = ModeleUtilisateurs::obtenirUtilisateur($courriel);
+  $utilisateur = $reqUtilisateur->fetch();
+  $reqUtilisateur->closeCursor();
+
+  if ($utilisateur) {
+    http_response_code(400);
+    echo json_encode(["erreur"=> "erreur"]);
+    return;
+  }
+
+ // echo json_encode(["succes"=> "succes"]);
+
 }
 
 function deconnecter()

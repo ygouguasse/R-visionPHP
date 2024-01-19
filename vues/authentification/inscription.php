@@ -2,7 +2,16 @@
 
 <?php ob_start(); ?>
 
-<form method="get" class="needs-validation" action="/api/authentification/inscription" novalidate>
+<div id="conteneurAlerte">
+<?php if (isset($_GET['erreur'])) { ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Identifiants invalides.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
+</div>
+
+<form method="POST" class="needs-validation" action="/api/authentification/inscription" novalidate>
   <div class="form-floating mb-3">
     <input type="courriel" class="form-control" id="input-courriel" name="courriel" placeholder="name@example.com" maxlength="50" pattern="[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}" required>
     <label for="input-courriel">Courriel</label>

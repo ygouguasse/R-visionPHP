@@ -6,6 +6,21 @@ class ModeleUtilisateurs
 {
   public static function obtenirUtilisateur($courriel)
   {
+    $requete = BD::ObtenirConnexion()->prepare(' SELECT *
+    FROM utilisateurs
+   WHERE courriel = :courriel ');
+   
+    $requete->bindparam('courriel', $courriel, PDO::PARAM_STR);
+    
+  
+    try {
+        $requete->execute();
+        return $requete;
+
+    } catch (PDOException $e) {
+        echo 'Erreur de connexion  : ' . $e->getMessage();
+    }
+
   }
 
   public static function ajouterUtilisateur($courriel, $motDePasse)

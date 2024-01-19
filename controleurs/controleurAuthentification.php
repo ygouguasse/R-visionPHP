@@ -1,5 +1,5 @@
 <?php
-
+require('modele/modeleUtilisateurs.php');
 function demarrerSession()
 {
   if (session_status() == PHP_SESSION_NONE) {
@@ -20,11 +20,11 @@ function validerTypeUtilisateur($type)
 
 function validerChampsAuthentification()
 {
-  if (empty($_GET['courriel'])) {
+  if (empty($_POST['courriel'])) {
     return false;
   }
 
-  if (empty($_GET['motDePasse'])) {
+  if (empty($_POST['motDePasse'])) {
     return false;
   }
 
@@ -38,7 +38,7 @@ function inscrire()
     return;
   }
 
-    ModeleUtilisateurs::ajouterUtilisateur($_GET['courriel'], $_GET['motDePasse']);
+    ModeleUtilisateurs::ajouterUtilisateur($_POST['courriel'], $_POST['motDePasse']);
     connecter();
 }
 
@@ -49,7 +49,7 @@ function connecter()
     return;
   }
 
-  $reqUtilisateur = ModeleUtilisateurs::obtenirUtilisateur($_GET['courriel']);
+  $reqUtilisateur = ModeleUtilisateurs::obtenirUtilisateur($_POST['courriel']);
   $utilisateur = $reqUtilisateur->fetch();
   $reqUtilisateur->closeCursor();
 
@@ -58,8 +58,11 @@ function connecter()
     return;
   }
 
-  if ($_GET['motDePasse'] === $utilisateur['motDePasse']) {
-    $_SESSION['utilisateur'] = [
+if (password_verify($_POST['motDePasse'],$utilisateur['motDePasse'])) {
+  
+  demarrerSession();
+  
+  $_SESSION['utilisateur'] = [
       'id' => $utilisateur['id'],
       'courriel' => $utilisateur['courriel'],
       'type' => $utilisateur['type']

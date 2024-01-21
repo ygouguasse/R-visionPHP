@@ -1,5 +1,4 @@
 <?php $titre = 'Inscription'; ?>
-
 <?php ob_start(); ?>
 
 <div id="conteneurAlerte">

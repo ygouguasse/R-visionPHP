@@ -6,10 +6,10 @@ try {
   get('/', "afficherPageAccueil");
 
   get('/authentification/connexion', "afficherPageConnexion");
-  get('/api/authentification/connexion', "connecter");
+  post('/api/authentification/connexion', "connecter");
   get('/api/authentification/deconnexion', "deconnecter");
   get('/authentification/inscription', "afficherPageinscription");
-  get('/api/authentification/inscription', "inscrire");
+  post('/api/authentification/inscription', "inscrire");
 
   get('/api/authentification/courriel-disponible/$courriel', "verifierCourrielDisponible");
 

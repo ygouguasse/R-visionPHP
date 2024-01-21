@@ -38,7 +38,24 @@ function inscrire()
     return;
   }
 
-    ModeleUtilisateurs::ajouterUtilisateur($_POST['courriel'], $_POST['motDePasse']);
+  $regex = '/^(?=.*([\p{Ll}\p{M}].*){2})(?=.*([\p{Lu}\p{M}].*){2})(?=.*(\d.*){2})(?=.*([@$!%*#?&].*){2})[\p{L}\p{M}\d@$!%*#?&]{12,20}$/u';
+	if (!preg_match($regex, $_POST['motDePasse'])) {
+    header("Location: /authentification/inscription");
+		return;
+	}
+
+
+  $regex = '/^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$/u';
+	if (!preg_match($regex, $_POST['courriel'])) {
+    header("Location: /authentification/inscription");
+		return;
+	}
+
+  $affichePassword=$_POST['motDePasse'];
+   
+  $MotDePasseHache = password_hash($_POST['motDePasse'], PASSWORD_DEFAULT);
+
+    ModeleUtilisateurs::ajouterUtilisateur($_POST['courriel'], $MotDePasseHache);
     connecter();
 }
 

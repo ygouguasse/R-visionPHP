@@ -18,6 +18,8 @@ function afficherPageDemandeSoumission() {
 
 function afficherPageSoumissionsEnAttente() {
   if (!validerTypeUtilisateur('vendeur')) {
+
+   
     header('Location: /authentification/connexion');
     return;
   }

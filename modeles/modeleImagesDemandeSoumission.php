@@ -16,6 +16,9 @@ class ModeleImagesDemandeSoumission
     return $req;
   }
 
+
+
+  
   public static function ajouterImage($nom, $extension, $demandesSoumissionId)
   {
     $sql = 'INSERT INTO images_demande_soumission

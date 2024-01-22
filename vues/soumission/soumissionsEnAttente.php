@@ -2,21 +2,25 @@
 
 <?php ob_start(); ?>
 
+<div class="row g-3">
 
 <?php
-while ($fichier = $reqSoumissions->fetch()) { ?>
+while($soumission = $reqSoumissions->fetch()) {
+  $src = '/images/' . $soumission['nom_image'];
+?>
 
 <div class="col-sm-6 col-md-4">
   <div class="card h-100">
-    <img src="/images/" + <?php echo $fichier['nom_image']; ?> class="card-img-top" alt="Citroën Traction Avant"> 
+    <img src="<?php echo $src ?>" class="card-img-top" alt="<?php out($soumission['nom']); ?>">
     <div class="card-body">
-      <h5 class="card-title">Citroën Traction Avant</h5>
+      <h5 class="card-title"><?php out($soumission['nom']); ?></h5>
     </div>
   </div>
 </div>
 
-<?php }
-?>
+<?php } ?>
+<?php $reqSoumissions->closeCursor(); ?>
+</div>
 
 <?php $contenu = ob_get_clean(); ?>
 
